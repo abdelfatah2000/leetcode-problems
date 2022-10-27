@@ -1,16 +1,15 @@
 class Solution {
     vector<vector<int>> res;
 public:
-    void backtrack (vector<int>& nums, int start){
-        bool x = find(res.begin(), res.end(), nums) != res.end();
-        if(start == nums.size() && x == false){
+    void backtrack (vector<int> nums, int start){
+        if(start == nums.size()){
             res.push_back(nums);
             return;
         }
         for(int i = start; i < nums.size(); i++){
-            swap(nums[start], nums[i]);
+            if(start != i && nums[i] == nums[start]) continue;
+            swap(nums[i], nums[start]);
             backtrack(nums, start+1);
-            swap(nums[start], nums[i]);
         }
     }
     vector<vector<int>> permuteUnique(vector<int>& nums) {
